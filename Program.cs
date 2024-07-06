@@ -43,6 +43,7 @@ namespace Snake
             while (true)
             {
                 Clear();
+
                 if (head.XPos == WindowWidth - 1 || head.XPos == 0 || head.YPos == WindowHeight - 1 || head.YPos == 0)
                 {
                     gameover = true;
@@ -50,7 +51,6 @@ namespace Snake
 
                 DrawBorder();
 
-                ForegroundColor = ConsoleColor.Green;
                 if (berry.XPos == head.XPos && berry.YPos == head.YPos)
                 {
                     score++;
@@ -59,7 +59,6 @@ namespace Snake
 
                 for (int i = 0; i < body.Count(); i++)
                 {
-                    //var bodyPixel = new Pixel(body[i].XPos, body[i].YPos, ConsoleColor.Green);
                     DrawPixel(body[i]);
                     if (body[i].XPos == head.XPos && body[i].YPos == head.YPos)
                     {
@@ -80,31 +79,7 @@ namespace Snake
                 {
                     time2 = DateTime.Now;
                     if (time2.Subtract(time).TotalMilliseconds > 500) { break; }
-                    if (KeyAvailable)
-                    {
-                        ConsoleKeyInfo toets = ReadKey(true);
-                        //Console.WriteLine(toets.Key.ToString());
-                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != Direction.Down && !buttonPressed)
-                        {
-                            movement = Direction.Up;
-                            buttonPressed = true;
-                        }
-                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != Direction.Up && !buttonPressed)
-                        {
-                            movement = Direction.Down;
-                            buttonPressed = true;
-                        }
-                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != Direction.Right && !buttonPressed)
-                        {
-                            movement = Direction.Left;
-                            buttonPressed = true;
-                        }
-                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != Direction.Left && !buttonPressed)
-                        {
-                            movement = Direction.Right;
-                            buttonPressed = true;
-                        }
-                    }
+                    movement = ReadMovement(movement);
                 }
                 body.Add(new Pixel(head.XPos, head.YPos, ConsoleColor.Green));
                 switch (movement)
@@ -160,6 +135,33 @@ namespace Snake
             SetCursorPosition(pixel.XPos, pixel.YPos);
             ForegroundColor = pixel.ScreenColor;
             Write("■");
+        }
+
+        static Direction ReadMovement(Direction movement)
+        {
+            if (Console.KeyAvailable)
+            {
+                var key = ReadKey(true).Key;
+
+                if (key == ConsoleKey.UpArrow && movement !=Direction.Down)
+                {
+                    movement = Direction.Up;
+                }
+                if (key == ConsoleKey.DownArrow && movement !=Direction.Up)
+                {
+                    movement = Direction.Down;
+                }
+                if (key == ConsoleKey.LeftArrow && movement !=Direction.Right)
+                {
+                    movement = Direction.Left;
+                }
+                if (key == ConsoleKey.RightArrow && movement !=Direction.Left)
+                {
+                    movement = Direction.Right;
+                }
+            }
+
+            return movement;
         }
     }
 
