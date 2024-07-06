@@ -45,7 +45,7 @@ namespace Snake
             while (true)
             {
                 Clear();
-                if (hoofd.xPos == screenWidth - 1 || hoofd.xPos == 0 || hoofd.yPos == screenHeight - 1 || hoofd.yPos == 0)
+                if (xPosBerry == screenWidth - 1 || xPosBerry == 0 || yPosBerry == screenHeight - 1 || yPosBerry == 0)
                 {
                     gameover = 1;
                 }
@@ -70,7 +70,7 @@ namespace Snake
                     Write("■");
                 }
                 ForegroundColor = ConsoleColor.Green;
-                if (berryx == hoofd.xPos && berryy == hoofd.yPos)
+                if (berryx == xPosBerry && berryy == yPosBerry)
                 {
                     score++;
                     berryx = rand.Next(1, screenWidth - 2);
@@ -80,7 +80,7 @@ namespace Snake
                 {
                     SetCursorPosition(xPosBody[i], yPosBody[i]);
                     Write("■");
-                    if (xPosBody[i] == hoofd.xPos && yPosBody[i] == hoofd.yPos)
+                    if (xPosBody[i] == xPosBerry && yPosBody[i] == yPosBerry)
                     {
                         gameover = 1;
                     }
@@ -89,18 +89,18 @@ namespace Snake
                 {
                     break;
                 }
-                SetCursorPosition(hoofd.xPos, hoofd.yPos);
-                ForegroundColor = hoofd.ScreenColor;
+                SetCursorPosition(xPosBerry, yPosBerry);
+                ForegroundColor = head.ScreenColor;
                 Write("■");
                 SetCursorPosition(berryx, berryy);
                 ForegroundColor = ConsoleColor.Cyan;
                 Write("■");
-                tijd = DateTime.Now;
+                time = DateTime.Now;
                 buttonpressed = "no";
                 while (true)
                 {
-                    tijd2 = DateTime.Now;
-                    if (tijd2.Subtract(tijd).TotalMilliseconds > 500) { break; }
+                    time2 = DateTime.Now;
+                    if (time2.Subtract(time).TotalMilliseconds > 500) { break; }
                     if (KeyAvailable)
                     {
                         ConsoleKeyInfo toets = ReadKey(true);
@@ -127,21 +127,21 @@ namespace Snake
                         }
                     }
                 }
-                xPosBody.Add(hoofd.xPos);
-                yPosBody.Add(hoofd.yPos);
+                xPosBody.Add(xPosBerry);
+                yPosBody.Add(yPosBerry);
                 switch (movement)
                 {
                     case "UP":
-                        hoofd.yPos--;
+                        yPosBerry--;
                         break;
                     case "DOWN":
-                        hoofd.yPos++;
+                        yPosBerry++;
                         break;
                     case "LEFT":
-                        hoofd.xPos--;
+                        xPosBerry--;
                         break;
                     case "RIGHT":
-                        hoofd.xPos++;
+                        xPosBerry++;
                         break;
                 }
                 if (xPosBody.Count() > score)
