@@ -76,11 +76,11 @@ namespace Snake
                     berryx = rand.Next(1, screenWidth - 2);
                     berryy = rand.Next(1, screenHeight - 2);
                 }
-                for (int i = 0; i < xposlijf.Count(); i++)
+                for (int i = 0; i < xPosBody.Count(); i++)
                 {
-                    SetCursorPosition(xposlijf[i], yposlijf[i]);
+                    SetCursorPosition(xPosBody[i], yPosBody[i]);
                     Write("■");
-                    if (xposlijf[i] == hoofd.xPos && yposlijf[i] == hoofd.yPos)
+                    if (xPosBody[i] == hoofd.xPos && yPosBody[i] == hoofd.yPos)
                     {
                         gameover = 1;
                     }
@@ -127,8 +127,8 @@ namespace Snake
                         }
                     }
                 }
-                xposlijf.Add(hoofd.xPos);
-                yposlijf.Add(hoofd.yPos);
+                xPosBody.Add(hoofd.xPos);
+                yPosBody.Add(hoofd.yPos);
                 switch (movement)
                 {
                     case "UP":
@@ -144,10 +144,10 @@ namespace Snake
                         hoofd.xPos++;
                         break;
                 }
-                if (xposlijf.Count() > score)
+                if (xPosBody.Count() > score)
                 {
-                    xposlijf.RemoveAt(0);
-                    yposlijf.RemoveAt(0);
+                    xPosBody.RemoveAt(0);
+                    yPosBody.RemoveAt(0);
                 }
             }
             SetCursorPosition(screenWidth / 5, screenHeight / 2);
