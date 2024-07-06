@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using static System.Console;
 ///█ ■
 ////https://www.youtube.com/watch?v=SGZgvMwjq2U
 namespace Snake
@@ -12,11 +13,11 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            Console.WindowHeight = 16;
-            Console.WindowWidth = 32;
+            WindowHeight = 16;
+            WindowWidth = 32;
 
-            var screenWidth = Console.WindowWidth;
-            var screenHeight = Console.WindowHeight;
+            var screenWidth = WindowWidth;
+            var screenHeight = WindowHeight;
 
             var rand = new Random();
 
@@ -43,32 +44,32 @@ namespace Snake
 
             while (true)
             {
-                Console.Clear();
+                Clear();
                 if (hoofd.xPos == screenWidth - 1 || hoofd.xPos == 0 || hoofd.yPos == screenHeight - 1 || hoofd.yPos == 0)
                 {
                     gameover = 1;
                 }
                 for (int i = 0; i < screenWidth; i++)
                 {
-                    Console.SetCursorPosition(i, 0);
-                    Console.Write("■");
+                    SetCursorPosition(i, 0);
+                    Write("■");
                 }
                 for (int i = 0; i < screenWidth; i++)
                 {
-                    Console.SetCursorPosition(i, screenHeight - 1);
-                    Console.Write("■");
+                    SetCursorPosition(i, screenHeight - 1);
+                    Write("■");
                 }
                 for (int i = 0; i < screenHeight; i++)
                 {
-                    Console.SetCursorPosition(0, i);
-                    Console.Write("■");
+                    SetCursorPosition(0, i);
+                    Write("■");
                 }
                 for (int i = 0; i < screenHeight; i++)
                 {
-                    Console.SetCursorPosition(screenWidth - 1, i);
-                    Console.Write("■");
+                    SetCursorPosition(screenWidth - 1, i);
+                    Write("■");
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
+                ForegroundColor = ConsoleColor.Green;
                 if (berryx == hoofd.xPos && berryy == hoofd.yPos)
                 {
                     score++;
@@ -77,8 +78,8 @@ namespace Snake
                 }
                 for (int i = 0; i < xposlijf.Count(); i++)
                 {
-                    Console.SetCursorPosition(xposlijf[i], yposlijf[i]);
-                    Console.Write("■");
+                    SetCursorPosition(xposlijf[i], yposlijf[i]);
+                    Write("■");
                     if (xposlijf[i] == hoofd.xPos && yposlijf[i] == hoofd.yPos)
                     {
                         gameover = 1;
@@ -88,21 +89,21 @@ namespace Snake
                 {
                     break;
                 }
-                Console.SetCursorPosition(hoofd.xPos, hoofd.yPos);
-                Console.ForegroundColor = hoofd.ScreenColor;
-                Console.Write("■");
-                Console.SetCursorPosition(berryx, berryy);
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write("■");
+                SetCursorPosition(hoofd.xPos, hoofd.yPos);
+                ForegroundColor = hoofd.ScreenColor;
+                Write("■");
+                SetCursorPosition(berryx, berryy);
+                ForegroundColor = ConsoleColor.Cyan;
+                Write("■");
                 tijd = DateTime.Now;
                 buttonpressed = "no";
                 while (true)
                 {
                     tijd2 = DateTime.Now;
                     if (tijd2.Subtract(tijd).TotalMilliseconds > 500) { break; }
-                    if (Console.KeyAvailable)
+                    if (KeyAvailable)
                     {
-                        ConsoleKeyInfo toets = Console.ReadKey(true);
+                        ConsoleKeyInfo toets = ReadKey(true);
                         //Console.WriteLine(toets.Key.ToString());
                         if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && buttonpressed == "no")
                         {
@@ -149,9 +150,9 @@ namespace Snake
                     yposlijf.RemoveAt(0);
                 }
             }
-            Console.SetCursorPosition(screenWidth / 5, screenHeight / 2);
-            Console.WriteLine("Game over, Score: " + score);
-            Console.SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
+            SetCursorPosition(screenWidth / 5, screenHeight / 2);
+            WriteLine("Game over, Score: " + score);
+            SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
         }
         class Pixel
         {
