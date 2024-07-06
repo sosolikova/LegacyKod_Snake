@@ -30,7 +30,7 @@ namespace Snake
             var head = new Pixel(WindowWidth / 2, WindowHeight / 2, ConsoleColor.Red);
             var body = new List<Pixel>();
 
-            var berry = new Pixel(rand.Next(1, WindowWidth - 2),rand.Next(1,WindowHeight - 2), ConsoleColor.Cyan);
+            var berry = new Pixel(rand.Next(1, WindowWidth - 2), rand.Next(1, WindowHeight - 2), ConsoleColor.Cyan);
 
             var movement = Direction.Right;
 
@@ -63,7 +63,7 @@ namespace Snake
                 {
                     break;
                 }
-                
+
                 DrawPixel(head);
                 DrawPixel(berry);
 
@@ -95,7 +95,7 @@ namespace Snake
                 }
             }
             SetCursorPosition(WindowWidth / 5, WindowHeight / 2);
-            WriteLine("Game over, Score: " + score);
+            WriteLine($"Game over, Score: {score - 5}");
             SetCursorPosition(WindowWidth / 5, WindowHeight / 2 + 1);
             ReadKey();
         }
