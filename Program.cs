@@ -32,20 +32,16 @@ namespace Snake
             var xPosBerry = rand.Next(0, screenWidth);
             var yPosBerry = rand.Next(0, screenHeight);
 
-            int berryx = rand.Next(0, screenWidth);
-            int berryy = rand.Next(0, screenHeight);
-
             var time = DateTime.Now;
             var time2 = DateTime.Now;
 
             var movement = "RIGHT";
-            string buttonpressed = "no";
-
+            var buttonPressed = "no";
 
             while (true)
             {
                 Clear();
-                if (xPosBerry == screenWidth - 1 || xPosBerry == 0 || yPosBerry == screenHeight - 1 || yPosBerry == 0)
+                if (head.XPos == screenWidth - 1 || head.XPos == 0 || head.YPos == screenHeight - 1 || head.YPos == 0)
                 {
                     gameover = 1;
                 }
@@ -70,17 +66,17 @@ namespace Snake
                     Write("■");
                 }
                 ForegroundColor = ConsoleColor.Green;
-                if (berryx == xPosBerry && berryy == yPosBerry)
+                if (xPosBerry == head.XPos && yPosBerry == head.YPos)
                 {
                     score++;
-                    berryx = rand.Next(1, screenWidth - 2);
-                    berryy = rand.Next(1, screenHeight - 2);
+                    xPosBerry = rand.Next(1, screenWidth - 2);
+                    yPosBerry = rand.Next(1, screenHeight - 2);
                 }
                 for (int i = 0; i < xPosBody.Count(); i++)
                 {
                     SetCursorPosition(xPosBody[i], yPosBody[i]);
                     Write("■");
-                    if (xPosBody[i] == xPosBerry && yPosBody[i] == yPosBerry)
+                    if (xPosBody[i] == head.XPos && yPosBody[i] == head.YPos)
                     {
                         gameover = 1;
                     }
@@ -89,14 +85,16 @@ namespace Snake
                 {
                     break;
                 }
-                SetCursorPosition(xPosBerry, yPosBerry);
+                SetCursorPosition(head.XPos, head.YPos);
                 ForegroundColor = head.ScreenColor;
                 Write("■");
-                SetCursorPosition(berryx, berryy);
+
+                SetCursorPosition(xPosBerry, yPosBerry);
                 ForegroundColor = ConsoleColor.Cyan;
                 Write("■");
+
                 time = DateTime.Now;
-                buttonpressed = "no";
+                buttonPressed = "no";
                 while (true)
                 {
                     time2 = DateTime.Now;
@@ -105,43 +103,43 @@ namespace Snake
                     {
                         ConsoleKeyInfo toets = ReadKey(true);
                         //Console.WriteLine(toets.Key.ToString());
-                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && buttonPressed == "no")
                         {
                             movement = "UP";
-                            buttonpressed = "yes";
+                            buttonPressed = "yes";
                         }
-                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != "UP" && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != "UP" && buttonPressed == "no")
                         {
                             movement = "DOWN";
-                            buttonpressed = "yes";
+                            buttonPressed = "yes";
                         }
-                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != "RIGHT" && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != "RIGHT" && buttonPressed == "no")
                         {
                             movement = "LEFT";
-                            buttonpressed = "yes";
+                            buttonPressed = "yes";
                         }
-                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != "LEFT" && buttonpressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != "LEFT" && buttonPressed == "no")
                         {
                             movement = "RIGHT";
-                            buttonpressed = "yes";
+                            buttonPressed = "yes";
                         }
                     }
                 }
-                xPosBody.Add(xPosBerry);
-                yPosBody.Add(yPosBerry);
+                xPosBody.Add(head.XPos);
+                yPosBody.Add(head.YPos);
                 switch (movement)
                 {
                     case "UP":
-                        yPosBerry--;
+                        head.YPos--;
                         break;
                     case "DOWN":
-                        yPosBerry++;
+                        head.YPos++;
                         break;
                     case "LEFT":
-                        xPosBerry--;
+                        head.XPos--;
                         break;
                     case "RIGHT":
-                        xPosBerry++;
+                        head.XPos++;
                         break;
                 }
                 if (xPosBody.Count() > score)
