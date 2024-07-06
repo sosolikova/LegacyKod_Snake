@@ -45,26 +45,9 @@ namespace Snake
                 {
                     gameover = 1;
                 }
-                for (int i = 0; i < screenWidth; i++)
-                {
-                    SetCursorPosition(i, 0);
-                    Write("■");
-                }
-                for (int i = 0; i < screenWidth; i++)
-                {
-                    SetCursorPosition(i, screenHeight - 1);
-                    Write("■");
-                }
-                for (int i = 0; i < screenHeight; i++)
-                {
-                    SetCursorPosition(0, i);
-                    Write("■");
-                }
-                for (int i = 0; i < screenHeight; i++)
-                {
-                    SetCursorPosition(screenWidth - 1, i);
-                    Write("■");
-                }
+
+                DrawBorder(screenWidth, screenHeight);
+
                 ForegroundColor = ConsoleColor.Green;
                 if (xPosBerry == head.XPos && yPosBerry == head.YPos)
                 {
@@ -152,19 +135,44 @@ namespace Snake
             WriteLine("Game over, Score: " + score);
             SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
         }
-        class Pixel
+
+        static void DrawBorder(int screenWidth, int screenHeight)
         {
-            public Pixel (int xPos, int yPos, ConsoleColor color)
+            for (int i = 0; i < screenWidth; i++)
             {
-                XPos = xPos;
-                YPos = yPos;
-                ScreenColor = color;
+                SetCursorPosition(i, 0);
+                Write("■");
+
+                SetCursorPosition(i, screenHeight - 1);
+                Write("■");
 
             }
-            public int XPos { get; set; }
-            public int YPos { get; set; }
-            public ConsoleColor ScreenColor { get; set; }
+
+            for (int i = 0; i < screenHeight; i++)
+            {
+                SetCursorPosition(0, i);
+                Write("■");
+
+                SetCursorPosition(screenWidth - 1, i);
+                Write("■");
+            }
         }
+    }
+
+
+    class Pixel
+    {
+        public Pixel (int xPos, int yPos, ConsoleColor color)
+        {
+            XPos = xPos;
+            YPos = yPos;
+            ScreenColor = color;
+        }
+
+        public int XPos { get; set; }
+        public int YPos { get; set; }
+        public ConsoleColor ScreenColor { get; set; }
+       
     }
 }
 //¦
