@@ -130,6 +130,7 @@ namespace Snake
             SetCursorPosition(WindowWidth / 5, WindowHeight / 2);
             WriteLine("Game over, Score: " + score);
             SetCursorPosition(WindowWidth / 5, WindowHeight / 2 + 1);
+            ReadKey();
         }
 
         static void DrawBorder()
