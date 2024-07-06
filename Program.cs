@@ -35,11 +35,7 @@ namespace Snake
 
             var berry = new Pixel(rand.Next(1, WindowWidth - 2),rand.Next(1,WindowHeight - 2), ConsoleColor.Cyan);
 
-            var time = DateTime.Now;
-            var time2 = DateTime.Now;
-
             var movement = Direction.Right;
-            var buttonPressed = false;
 
             while (true)
             {
@@ -74,8 +70,6 @@ namespace Snake
                 DrawPixel(head);
                 DrawPixel(berry);
 
-                time = DateTime.Now;
-                buttonPressed = false;
                 var sw = Stopwatch.StartNew();
                 while (sw.ElapsedMilliseconds <= 500)
                 {
