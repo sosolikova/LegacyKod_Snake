@@ -39,6 +39,7 @@ namespace Snake
 
             var xPosBerry = rand.Next(0, screenWidth);
             var yPosBerry = rand.Next(0, screenHeight);
+            var berry = new Pixel(xPosBerry, yPosBerry, ConsoleColor.Cyan);
 
             var time = DateTime.Now;
             var time2 = DateTime.Now;
@@ -65,8 +66,8 @@ namespace Snake
                 }
                 for (int i = 0; i < xPosBody.Count(); i++)
                 {
-                    SetCursorPosition(xPosBody[i], yPosBody[i]);
-                    Write("■");
+                    var bodyPixel = new Pixel(xPosBody[i], yPosBody[i], ConsoleColor.Green);
+                    DrawPixel(bodyPixel);
                     if (xPosBody[i] == head.XPos && yPosBody[i] == head.YPos)
                     {
                         gameover = true;
@@ -76,13 +77,9 @@ namespace Snake
                 {
                     break;
                 }
-                SetCursorPosition(head.XPos, head.YPos);
-                ForegroundColor = head.ScreenColor;
-                Write("■");
-
-                SetCursorPosition(xPosBerry, yPosBerry);
-                ForegroundColor = ConsoleColor.Cyan;
-                Write("■");
+                
+                DrawPixel(head);
+                DrawPixel(berry);
 
                 time = DateTime.Now;
                 buttonPressed = false;
@@ -165,8 +162,14 @@ namespace Snake
                 Write("■");
             }
         }
-    }
 
+        static void DrawPixel(Pixel pixel)
+        {
+            SetCursorPosition(pixel.XPos, pixel.YPos);
+            ForegroundColor = pixel.ScreenColor;
+            Write("■");
+        }
+    }
 
     class Pixel
     {
