@@ -24,21 +24,16 @@ namespace Snake
             WindowHeight = 16;
             WindowWidth = 32;
 
-            var screenWidth = WindowWidth;
-            var screenHeight = WindowHeight;
-
             var rand = new Random();
 
             var score = 5;
             var gameover = false;
 
-            var head = new Pixel(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
+            var head = new Pixel(WindowWidth / 2, WindowHeight / 2, ConsoleColor.Red);
 
             var xPosBody = new List<int>();
             var yPosBody = new List<int>();
 
-            var xPosBerry = rand.Next(0, screenWidth);
-            var yPosBerry = rand.Next(0, screenHeight);
             var berry = new Pixel(rand.Next(1, WindowWidth - 2),rand.Next(1,WindowHeight - 2), ConsoleColor.Cyan);
 
             var time = DateTime.Now;
