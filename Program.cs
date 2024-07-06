@@ -11,6 +11,14 @@ namespace Snake
 {
     class Program
     {
+        enum Direction
+        {
+            Up,
+            Down,
+            Right,
+            Left
+        }
+
         static void Main(string[] args)
         {
             WindowHeight = 16;
@@ -35,7 +43,7 @@ namespace Snake
             var time = DateTime.Now;
             var time2 = DateTime.Now;
 
-            var movement = "RIGHT";
+            var movement = Direction.Right;
             var buttonPressed = false;
 
             while (true)
@@ -86,24 +94,24 @@ namespace Snake
                     {
                         ConsoleKeyInfo toets = ReadKey(true);
                         //Console.WriteLine(toets.Key.ToString());
-                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && !buttonPressed)
+                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != Direction.Down && !buttonPressed)
                         {
-                            movement = "UP";
+                            movement = Direction.Up;
                             buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != "UP" && !buttonPressed)
+                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != Direction.Up && !buttonPressed)
                         {
-                            movement = "DOWN";
+                            movement = Direction.Down;
                             buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != "RIGHT" && !buttonPressed)
+                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != Direction.Right && !buttonPressed)
                         {
-                            movement = "LEFT";
+                            movement = Direction.Left;
                             buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != "LEFT" && !buttonPressed)
+                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != Direction.Left && !buttonPressed)
                         {
-                            movement = "RIGHT";
+                            movement = Direction.Right;
                             buttonPressed = true;
                         }
                     }
@@ -112,16 +120,16 @@ namespace Snake
                 yPosBody.Add(head.YPos);
                 switch (movement)
                 {
-                    case "UP":
+                    case Direction.Up:
                         head.YPos--;
                         break;
-                    case "DOWN":
+                    case Direction.Down:
                         head.YPos++;
                         break;
-                    case "LEFT":
+                    case Direction.Left:
                         head.XPos--;
                         break;
-                    case "RIGHT":
+                    case Direction.Right:
                         head.XPos++;
                         break;
                 }
