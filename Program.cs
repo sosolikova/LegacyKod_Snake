@@ -155,7 +155,7 @@ namespace Snake
             return movement;
         }
 
-        struct Pixel
+        class Pixel
         {
             public Pixel (int xPos, int yPos, ConsoleColor color)
             {
