@@ -22,7 +22,7 @@ namespace Snake
             var rand = new Random();
 
             var score = 5;
-            var gameover = 0;
+            var gameover = false;
 
             var head = new Pixel(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
 
@@ -43,7 +43,7 @@ namespace Snake
                 Clear();
                 if (head.XPos == screenWidth - 1 || head.XPos == 0 || head.YPos == screenHeight - 1 || head.YPos == 0)
                 {
-                    gameover = 1;
+                    gameover = true;
                 }
 
                 DrawBorder(screenWidth, screenHeight);
@@ -53,7 +53,7 @@ namespace Snake
                 {
                     score++;
                     xPosBerry = rand.Next(1, screenWidth - 2);
-                    yPosBerry = rand.Next(1, screenHeight - 2);
+                    yPosBerry = rand.Next(1, screenHeight - 2); 
                 }
                 for (int i = 0; i < xPosBody.Count(); i++)
                 {
@@ -61,10 +61,10 @@ namespace Snake
                     Write("■");
                     if (xPosBody[i] == head.XPos && yPosBody[i] == head.YPos)
                     {
-                        gameover = 1;
+                        gameover = true;
                     }
                 }
-                if (gameover == 1)
+                if (gameover)
                 {
                     break;
                 }
