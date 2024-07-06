@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using static System.Console;
+using System.Diagnostics;
 ///█ ■
 ////https://www.youtube.com/watch?v=SGZgvMwjq2U
 namespace Snake
@@ -75,13 +76,13 @@ namespace Snake
 
                 time = DateTime.Now;
                 buttonPressed = false;
-                while (true)
+                var sw = Stopwatch.StartNew();
+                while (sw.ElapsedMilliseconds <= 500)
                 {
-                    time2 = DateTime.Now;
-                    if (time2.Subtract(time).TotalMilliseconds > 500) { break; }
                     movement = ReadMovement(movement);
                 }
                 body.Add(new Pixel(head.XPos, head.YPos, ConsoleColor.Green));
+
                 switch (movement)
                 {
                     case Direction.Up:
@@ -160,9 +161,9 @@ namespace Snake
                     movement = Direction.Right;
                 }
             }
-
             return movement;
         }
+
         struct Pixel
         {
             public Pixel (int xPos, int yPos, ConsoleColor color)
@@ -171,12 +172,10 @@ namespace Snake
                  YPos = yPos;
                  ScreenColor = color;
             }
-
             public int XPos { get; set; }
             public int YPos { get; set; }
             public ConsoleColor ScreenColor { get; set; }
         }
-    }
-   
+    }  
 }
-//¦
+
