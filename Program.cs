@@ -14,56 +14,66 @@ namespace Snake
         {
             Console.WindowHeight = 16;
             Console.WindowWidth = 32;
-            int screenwidth = Console.WindowWidth;
-            int screenheight = Console.WindowHeight;
-            Random randomnummer = new Random();
-            int score = 5;
-            int gameover = 0;
-            Pixel hoofd = new Pixel();
-            hoofd.xPos = screenwidth / 2;
-            hoofd.yPos = screenheight / 2;
-            hoofd.ScreenColor = ConsoleColor.Red;
-            string movement = "RIGHT";
-            List<int> xposlijf = new List<int>();
-            List<int> yposlijf = new List<int>();
-            int berryx = randomnummer.Next(0, screenwidth);
-            int berryy = randomnummer.Next(0, screenheight);
-            DateTime tijd = DateTime.Now;
-            DateTime tijd2 = DateTime.Now;
+
+            var screenWidth = Console.WindowWidth;
+            var screenHeight = Console.WindowHeight;
+
+            var rand = new Random();
+
+            var score = 5;
+            var gameover = 0;
+
+            var head = new Pixel(screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
+
+            var xPosBody = new List<int>();
+            var yPosBody = new List<int>();
+
+            var xPosBerry = rand.Next(0, screenWidth);
+            var yPosBerry = rand.Next(0, screenHeight);
+
+            int berryx = rand.Next(0, screenWidth);
+            int berryy = rand.Next(0, screenHeight);
+
+            var time = DateTime.Now;
+            var time2 = DateTime.Now;
+
+            var movement = "RIGHT";
             string buttonpressed = "no";
+
+
             while (true)
             {
                 Console.Clear();
-                if (hoofd.xPos == screenwidth - 1 || hoofd.xPos == 0 || hoofd.yPos == screenheight - 1 || hoofd.yPos == 0)
+                if (hoofd.xPos == screenWidth - 1 || hoofd.xPos == 0 || hoofd.yPos == screenHeight - 1 || hoofd.yPos == 0)
                 {
                     gameover = 1;
                 }
-                for (int i = 0; i < screenwidth; i++)
+                for (int i = 0; i < screenWidth; i++)
                 {
                     Console.SetCursorPosition(i, 0);
                     Console.Write("■");
                 }
-                for (int i = 0; i < screenwidth; i++)
+                for (int i = 0; i < screenWidth; i++)
                 {
-                    Console.SetCursorPosition(i, screenheight - 1);
+                    Console.SetCursorPosition(i, screenHeight - 1);
                     Console.Write("■");
                 }
-                for (int i = 0; i < screenheight; i++)
+                for (int i = 0; i < screenHeight; i++)
                 {
                     Console.SetCursorPosition(0, i);
                     Console.Write("■");
                 }
-                for (int i = 0; i < screenheight; i++)
+                for (int i = 0; i < screenHeight; i++)
                 {
-                    Console.SetCursorPosition(screenwidth - 1, i);
+                    Console.SetCursorPosition(screenWidth - 1, i);
                     Console.Write("■");
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
                 if (berryx == hoofd.xPos && berryy == hoofd.yPos)
                 {
                     score++;
-                    berryx = randomnummer.Next(1, screenwidth - 2);
-                    berryy = randomnummer.Next(1, screenheight - 2);
+                    berryx = rand.Next(1, screenWidth - 2);
+                    berryy = rand.Next(1, screenHeight - 2);
                 }
                 for (int i = 0; i < xposlijf.Count(); i++)
                 {
@@ -139,9 +149,9 @@ namespace Snake
                     yposlijf.RemoveAt(0);
                 }
             }
-            Console.SetCursorPosition(screenwidth / 5, screenheight / 2);
+            Console.SetCursorPosition(screenWidth / 5, screenHeight / 2);
             Console.WriteLine("Game over, Score: " + score);
-            Console.SetCursorPosition(screenwidth / 5, screenheight / 2 + 1);
+            Console.SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
         }
         class Pixel
         {
