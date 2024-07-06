@@ -39,7 +39,7 @@ namespace Snake
 
             var xPosBerry = rand.Next(0, screenWidth);
             var yPosBerry = rand.Next(0, screenHeight);
-            var berry = new Pixel(xPosBerry, yPosBerry, ConsoleColor.Cyan);
+            var berry = new Pixel(rand.Next(1, WindowWidth - 2),rand.Next(1,WindowHeight - 2), ConsoleColor.Cyan);
 
             var time = DateTime.Now;
             var time2 = DateTime.Now;
@@ -50,19 +50,18 @@ namespace Snake
             while (true)
             {
                 Clear();
-                if (head.XPos == screenWidth - 1 || head.XPos == 0 || head.YPos == screenHeight - 1 || head.YPos == 0)
+                if (head.XPos == WindowWidth - 1 || head.XPos == 0 || head.YPos == WindowHeight - 1 || head.YPos == 0)
                 {
                     gameover = true;
                 }
 
-                DrawBorder(screenWidth, screenHeight);
+                DrawBorder();
 
                 ForegroundColor = ConsoleColor.Green;
-                if (xPosBerry == head.XPos && yPosBerry == head.YPos)
+                if (berry.XPos == head.XPos && berry.YPos == head.YPos)
                 {
                     score++;
-                    xPosBerry = rand.Next(1, screenWidth - 2);
-                    yPosBerry = rand.Next(1, screenHeight - 2); 
+                    berry = new Pixel(rand.Next(1, WindowWidth - 2), rand.Next(1, WindowHeight - 2), ConsoleColor.Cyan);
                 }
                 for (int i = 0; i < xPosBody.Count(); i++)
                 {
@@ -136,29 +135,29 @@ namespace Snake
                     yPosBody.RemoveAt(0);
                 }
             }
-            SetCursorPosition(screenWidth / 5, screenHeight / 2);
+            SetCursorPosition(WindowWidth / 5, WindowHeight / 2);
             WriteLine("Game over, Score: " + score);
-            SetCursorPosition(screenWidth / 5, screenHeight / 2 + 1);
+            SetCursorPosition(WindowWidth / 5, WindowHeight / 2 + 1);
         }
 
-        static void DrawBorder(int screenWidth, int screenHeight)
+        static void DrawBorder()
         {
-            for (int i = 0; i < screenWidth; i++)
+            for (int i = 0; i < WindowWidth; i++)
             {
                 SetCursorPosition(i, 0);
                 Write("■");
 
-                SetCursorPosition(i, screenHeight - 1);
+                SetCursorPosition(i, WindowHeight - 1);
                 Write("■");
 
             }
 
-            for (int i = 0; i < screenHeight; i++)
+            for (int i = 0; i < WindowHeight; i++)
             {
                 SetCursorPosition(0, i);
                 Write("■");
 
-                SetCursorPosition(screenWidth - 1, i);
+                SetCursorPosition(WindowWidth - 1, i);
                 Write("■");
             }
         }
