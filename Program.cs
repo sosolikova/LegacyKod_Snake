@@ -36,7 +36,7 @@ namespace Snake
             var time2 = DateTime.Now;
 
             var movement = "RIGHT";
-            var buttonPressed = "no";
+            var buttonPressed = false;
 
             while (true)
             {
@@ -77,7 +77,7 @@ namespace Snake
                 Write("■");
 
                 time = DateTime.Now;
-                buttonPressed = "no";
+                buttonPressed = false;
                 while (true)
                 {
                     time2 = DateTime.Now;
@@ -86,25 +86,25 @@ namespace Snake
                     {
                         ConsoleKeyInfo toets = ReadKey(true);
                         //Console.WriteLine(toets.Key.ToString());
-                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && buttonPressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.UpArrow) && movement != "DOWN" && !buttonPressed)
                         {
                             movement = "UP";
-                            buttonPressed = "yes";
+                            buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != "UP" && buttonPressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.DownArrow) && movement != "UP" && !buttonPressed)
                         {
                             movement = "DOWN";
-                            buttonPressed = "yes";
+                            buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != "RIGHT" && buttonPressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.LeftArrow) && movement != "RIGHT" && !buttonPressed)
                         {
                             movement = "LEFT";
-                            buttonPressed = "yes";
+                            buttonPressed = true;
                         }
-                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != "LEFT" && buttonPressed == "no")
+                        if (toets.Key.Equals(ConsoleKey.RightArrow) && movement != "LEFT" && !buttonPressed)
                         {
                             movement = "RIGHT";
-                            buttonPressed = "yes";
+                            buttonPressed = true;
                         }
                     }
                 }
