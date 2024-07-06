@@ -30,9 +30,7 @@ namespace Snake
             var gameover = false;
 
             var head = new Pixel(WindowWidth / 2, WindowHeight / 2, ConsoleColor.Red);
-
-            var xPosBody = new List<int>();
-            var yPosBody = new List<int>();
+            var body = new List<Pixel>();
 
             var berry = new Pixel(rand.Next(1, WindowWidth - 2),rand.Next(1,WindowHeight - 2), ConsoleColor.Cyan);
 
@@ -58,11 +56,12 @@ namespace Snake
                     score++;
                     berry = new Pixel(rand.Next(1, WindowWidth - 2), rand.Next(1, WindowHeight - 2), ConsoleColor.Cyan);
                 }
-                for (int i = 0; i < xPosBody.Count(); i++)
+
+                for (int i = 0; i < body.Count(); i++)
                 {
-                    var bodyPixel = new Pixel(xPosBody[i], yPosBody[i], ConsoleColor.Green);
-                    DrawPixel(bodyPixel);
-                    if (xPosBody[i] == head.XPos && yPosBody[i] == head.YPos)
+                    //var bodyPixel = new Pixel(body[i].XPos, body[i].YPos, ConsoleColor.Green);
+                    DrawPixel(body[i]);
+                    if (body[i].XPos == head.XPos && body[i].YPos == head.YPos)
                     {
                         gameover = true;
                     }
@@ -107,8 +106,7 @@ namespace Snake
                         }
                     }
                 }
-                xPosBody.Add(head.XPos);
-                yPosBody.Add(head.YPos);
+                body.Add(new Pixel(head.XPos, head.YPos, ConsoleColor.Green));
                 switch (movement)
                 {
                     case Direction.Up:
@@ -124,10 +122,9 @@ namespace Snake
                         head.XPos++;
                         break;
                 }
-                if (xPosBody.Count() > score)
+                if (body.Count() > score)
                 {
-                    xPosBody.RemoveAt(0);
-                    yPosBody.RemoveAt(0);
+                    body.RemoveAt(0);
                 }
             }
             SetCursorPosition(WindowWidth / 5, WindowHeight / 2);
