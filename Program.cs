@@ -19,10 +19,10 @@ namespace Snake
             Random randomnummer = new Random();
             int score = 5;
             int gameover = 0;
-            pixel hoofd = new pixel();
-            hoofd.xpos = screenwidth / 2;
-            hoofd.ypos = screenheight / 2;
-            hoofd.schermkleur = ConsoleColor.Red;
+            Pixel hoofd = new Pixel();
+            hoofd.xPos = screenwidth / 2;
+            hoofd.yPos = screenheight / 2;
+            hoofd.ScreenColor = ConsoleColor.Red;
             string movement = "RIGHT";
             List<int> xposlijf = new List<int>();
             List<int> yposlijf = new List<int>();
@@ -34,7 +34,7 @@ namespace Snake
             while (true)
             {
                 Console.Clear();
-                if (hoofd.xpos == screenwidth - 1 || hoofd.xpos == 0 || hoofd.ypos == screenheight - 1 || hoofd.ypos == 0)
+                if (hoofd.xPos == screenwidth - 1 || hoofd.xPos == 0 || hoofd.yPos == screenheight - 1 || hoofd.yPos == 0)
                 {
                     gameover = 1;
                 }
@@ -59,7 +59,7 @@ namespace Snake
                     Console.Write("■");
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
-                if (berryx == hoofd.xpos && berryy == hoofd.ypos)
+                if (berryx == hoofd.xPos && berryy == hoofd.yPos)
                 {
                     score++;
                     berryx = randomnummer.Next(1, screenwidth - 2);
@@ -69,7 +69,7 @@ namespace Snake
                 {
                     Console.SetCursorPosition(xposlijf[i], yposlijf[i]);
                     Console.Write("■");
-                    if (xposlijf[i] == hoofd.xpos && yposlijf[i] == hoofd.ypos)
+                    if (xposlijf[i] == hoofd.xPos && yposlijf[i] == hoofd.yPos)
                     {
                         gameover = 1;
                     }
@@ -78,8 +78,8 @@ namespace Snake
                 {
                     break;
                 }
-                Console.SetCursorPosition(hoofd.xpos, hoofd.ypos);
-                Console.ForegroundColor = hoofd.schermkleur;
+                Console.SetCursorPosition(hoofd.xPos, hoofd.yPos);
+                Console.ForegroundColor = hoofd.ScreenColor;
                 Console.Write("■");
                 Console.SetCursorPosition(berryx, berryy);
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -116,21 +116,21 @@ namespace Snake
                         }
                     }
                 }
-                xposlijf.Add(hoofd.xpos);
-                yposlijf.Add(hoofd.ypos);
+                xposlijf.Add(hoofd.xPos);
+                yposlijf.Add(hoofd.yPos);
                 switch (movement)
                 {
                     case "UP":
-                        hoofd.ypos--;
+                        hoofd.yPos--;
                         break;
                     case "DOWN":
-                        hoofd.ypos++;
+                        hoofd.yPos++;
                         break;
                     case "LEFT":
-                        hoofd.xpos--;
+                        hoofd.xPos--;
                         break;
                     case "RIGHT":
-                        hoofd.xpos++;
+                        hoofd.xPos++;
                         break;
                 }
                 if (xposlijf.Count() > score)
@@ -143,11 +143,18 @@ namespace Snake
             Console.WriteLine("Game over, Score: " + score);
             Console.SetCursorPosition(screenwidth / 5, screenheight / 2 + 1);
         }
-        class pixel
+        class Pixel
         {
-            public int xpos { get; set; }
-            public int ypos { get; set; }
-            public ConsoleColor schermkleur { get; set; }
+            public Pixel (int xPos, int yPos, ConsoleColor color)
+            {
+                XPos = xPos;
+                YPos = yPos;
+                ScreenColor = color;
+
+            }
+            public int XPos { get; set; }
+            public int YPos { get; set; }
+            public ConsoleColor ScreenColor { get; set; }
         }
     }
 }
